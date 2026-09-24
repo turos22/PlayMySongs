@@ -2,7 +2,7 @@
             try {
                 const url = 'http://localhost:8080/mysong';
                 const response = await fetch(url + '/allmusics');
-                const musicas = await response.json();
+                const musicas = await response.json(); 
                 const container = document.getElementById('lista-musicas');
                 container.innerHTML = '';
 
@@ -15,7 +15,7 @@
                             <small>Estilo: ${musica.estilo}</small>
                         </div>
                         <div>
-                            <audio controls src="/uploads/${musica.caminho_mp3}"></audio>
+                            <audio controls src="http://localhost:8080/uploads/${musica.caminho_mp3}"></audio>
                         </div>
                     `;
                     container.appendChild(card);
