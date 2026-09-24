@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping(value = "mysong")
 public class MusicaController {
