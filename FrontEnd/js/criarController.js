@@ -1,3 +1,33 @@
+  document.addEventListener("DOMContentLoaded", async () => {
+      const selectEstilo = document.getElementById("estilo");
+
+      try {
+          // Ajustado para o caminho correto caso esteja dentro da pasta js
+          const response = await fetch('js/estilos.json');
+
+          if (!response.ok) {
+              throw new Error("Não foi possível carregar os estilos musicais.");
+          }
+
+          const estilos = await response.json();
+
+          // Reseta o option inicial de "Carregando..."
+          selectEstilo.innerHTML = '<option value="">Selecione um estilo</option>';
+
+          // Preenche o select dinamicamente com os dados do JSON
+          estilos.forEach(estilo => {
+              const option = document.createElement("option");
+              option.value = estilo.nome;
+              option.textContent = estilo.nome;
+              selectEstilo.appendChild(option);
+          });
+
+      } catch (error) { // Corrigido de 'class' para 'catch'
+          console.error("Erro ao buscar estilos:", error);
+          selectEstilo.innerHTML = '<option value="">Erro ao carregar estilos</option>';
+      }
+  });
+
   document.getElementById('form-musica').addEventListener('submit', async function(e) {
             e.preventDefault();
 
