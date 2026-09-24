@@ -2,7 +2,6 @@
       const selectEstilo = document.getElementById("estilo");
 
       try {
-          // Ajustado para o caminho correto caso esteja dentro da pasta js
           const response = await fetch('js/estilos.json');
 
           if (!response.ok) {
@@ -11,10 +10,8 @@
 
           const estilos = await response.json();
 
-          // Reseta o option inicial de "Carregando..."
           selectEstilo.innerHTML = '<option value="">Selecione um estilo</option>';
 
-          // Preenche o select dinamicamente com os dados do JSON
           estilos.forEach(estilo => {
               const option = document.createElement("option");
               option.value = estilo.nome;
@@ -22,7 +19,7 @@
               selectEstilo.appendChild(option);
           });
 
-      } catch (error) { // Corrigido de 'class' para 'catch'
+      } catch (error) {
           console.error("Erro ao buscar estilos:", error);
           selectEstilo.innerHTML = '<option value="">Erro ao carregar estilos</option>';
       }
