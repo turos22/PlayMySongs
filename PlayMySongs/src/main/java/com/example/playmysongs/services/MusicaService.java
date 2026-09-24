@@ -16,4 +16,8 @@ public class MusicaService {
     public List<Musica> findAll(){
         return musicaRepository.findAll();
     }
+
+    public Musica AddMusica(Musica musica){
+        return musicaRepository.save(musica);
+    }
 }

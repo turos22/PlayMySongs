@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "songs")
 public class Musica {
     private String estilo;
-    private String nome;
+    private String titulo;
     private String artista;
     private String caminho_mp3;
 
@@ -13,9 +13,9 @@ public class Musica {
 
     }
 
-    public Musica(String estilo, String nome, String artista, String caminho_mp3) {
+    public Musica(String estilo, String titulo, String artista, String caminho_mp3) {
         this.estilo = estilo;
-        this.nome = nome;
+        this.titulo = titulo;
         this.artista = artista;
         this.caminho_mp3 = caminho_mp3;
     }
@@ -28,12 +28,12 @@ public class Musica {
         this.estilo = estilo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setTitulo(String nome) {
+        this.titulo = nome;
     }
 
     public String getArtista() {
