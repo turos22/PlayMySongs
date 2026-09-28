@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MusicaService {
@@ -19,5 +20,14 @@ public class MusicaService {
 
     public Musica AddMusica(Musica musica){
         return musicaRepository.save(musica);
+    }
+
+    public List<Musica> porEstilos(String estilos){
+        return musicaRepository.findByEstiloIgnoreCase(estilos);
+    }
+
+    public List<String> listarEstilos(){
+        return musicaRepository.findAll().stream().map(Musica::getEstilo).distinct().collect(Collectors.toList());
+
     }
 }

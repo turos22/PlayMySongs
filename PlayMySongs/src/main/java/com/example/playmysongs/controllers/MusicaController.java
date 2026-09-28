@@ -54,5 +54,15 @@ public class MusicaController {
         return ResponseEntity.badRequest().body("Ocorreu um erro");
     }
 
+    @GetMapping(value = "find-musics")
+    public ResponseEntity<Object> porEstilo(@RequestParam("estilo") String estilo)
+    {
+        return ResponseEntity.ok(musicaService.porEstilos(estilo));
+    }
+    @GetMapping(value = "get-music-styles")
+    public ResponseEntity<Object> listaEstilos(){
+        return ResponseEntity.ok(musicaService.listarEstilos());
+    }
+
 
 }
