@@ -2,7 +2,7 @@
       const selectEstilo = document.getElementById("estilo");
 
       try {
-          const response = await fetch('js/estilos.json');
+          const response = await fetch('http://localhost:8080/mysong/get-music-styles');
 
           if (!response.ok) {
               throw new Error("Não foi possível carregar os estilos musicais.");
@@ -14,8 +14,8 @@
 
           estilos.forEach(estilo => {
               const option = document.createElement("option");
-              option.value = estilo.nome;
-              option.textContent = estilo.nome;
+              option.value = estilo;
+              option.textContent = estilo;
               selectEstilo.appendChild(option);
           });
 
@@ -34,6 +34,14 @@
             const artista = document.getElementById('artista').value;
             const audioFile = document.getElementById('audio').files[0];
 
+            // valida extensao: apenas mp3
+            const extensao = audioFile ? audioFile.name.split('.').pop().toLowerCase() : '';
+            if (extensao !== 'mp3') {
+                document.getElementById('mensagem').style.color = 'red';
+                document.getElementById('mensagem').textContent = 'Erro: o arquivo deve ser mp3.';
+                return;
+            }
+
             const formData = new FormData();
             formData.append('estilo', estilo);
             formData.append('titulo', nome);
@@ -41,7 +49,7 @@
             formData.append('audio', audioFile);
 
             try {
-                const response = await fetch(url + '/add-music', {
+                const response = await fetch(url + '/music-upload', {
                     method: 'POST',
                     body: formData
                 });
@@ -51,9 +59,9 @@
                     document.getElementById('mensagem').textContent = 'Música cadastrada com sucesso!';
                     document.getElementById('form-musica').reset();
                 } else {
-                    const erro = await response.text();
+                    const erro = await response.json();
                     document.getElementById('mensagem').style.color = 'red';
-                    document.getElementById('mensagem').textContent = 'Erro: ' + erro;
+                    document.getElementById('mensagem').textContent = 'Erro: ' + erro.mensagem;
                 }
             } catch (err) {
                 document.getElementById('mensagem').style.color = 'red';

@@ -1,9 +1,12 @@
 package com.example.playmysongs.entities;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "songs")
 public class Musica {
+    @Id
+    private String id;
     private String estilo;
     private String titulo;
     private String artista;
@@ -50,5 +53,13 @@ public class Musica {
 
     public void setCaminho_mp3(String caminho_mp3) {
         this.caminho_mp3 = caminho_mp3;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

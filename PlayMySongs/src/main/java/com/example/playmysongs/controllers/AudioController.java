@@ -9,14 +9,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = {"http://127.0.0.1:5500", "http://localhost:5500"})
 @RestController
 @RequestMapping("uploads")
 public class AudioController {
 
     @GetMapping("/{nomeArquivo}")
     public ResponseEntity<Object> obterAudio(@PathVariable String nomeArquivo) {
-        // Procura a pasta a partir do diretório de execução do projeto
         File arquivo = new File("src/main/resources/static/uploads/" + nomeArquivo);
 
         if (!arquivo.exists()) {
